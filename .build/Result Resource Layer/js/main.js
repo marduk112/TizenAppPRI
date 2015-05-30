@@ -2,7 +2,7 @@
 var SAAgent = null;
 var SASocket = null;
 var CHANNELID = 123;
-var ProviderAppName = "Pulsometer";
+var ProviderAppName = "PulsometerProvider";
 
 function createHTML(log_string)
 {

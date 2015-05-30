@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <application name="Pulsex">
+    <application name="PulsometerConsumers">
         <serviceProfile
-            id="/system/pulsex"
+            id="/sample/pulsex"
             name="pulsex"
             role="consumer"            
-            version="2.0"
-            serviceLimit="ANY"
-            serviceTimeout="10">
+            version="2.0">
             <supportedTransports>
                 <transport type="TRANSPORT_BT"/>               
             </supportedTransports>
