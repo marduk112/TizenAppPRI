@@ -88,10 +88,19 @@ function onreceive(channelId, data) {
 	createHTML(data);
 }
 
+
+function onchangedCB(hrmInfo)
+{
+   console.log("Heart Rate: " + hrmInfo.heartRate);
+   console.log("Peak-to-peak interval: " + hrmInfo.rRInterval + " milliseconds");
+   alert("Heart Rate: " + hrmInfo.heartRate);
+}
+
 function fetch() {
 	try {
 		SASocket.setDataReceiveListener(onreceive);
-		SASocket.sendData(CHANNELID, "Hello Accessory!");
+		SASocket.sendData(CHANNELID, "Hello Accessory!");		
+	
 	} catch(err) {
 		console.log("exception [" + err.name + "] msg[" + err.message + "]");
 	}

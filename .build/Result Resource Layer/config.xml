@@ -4,11 +4,14 @@
     <content src="index.html"/>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <feature name="http://developer.samsung.com/tizen/feature/network.accessory_protocol"/>
+    <feature name="http://tizen.org/feature/sensor.heart_rate_monitor"/>
     <icon src="icon.png"/>
     <tizen:metadata key="AccessoryServicesLocation" value="res/xml/sapservices.xml"/>
     <name>Pulsex</name>
     <tizen:privilege name="http://developer.samsung.com/privilege/accessoryprotocol"/>
-    <tizen:setting background-support="disable" encryption="disable" hwkey-event="enable"/>    
-               
+    <tizen:privilege name="http://developer.samsung.com/privilege/healthinfo"/>
+    <tizen:setting background-support="disable" encryption="disable" hwkey-event="enable"/>  
+    <tizen:privilege name="http://tizen.org/privilege/tizen"/>   
+	<feature name="http://tizen.org/api/tizen" required="true"/>       
      
 </widget>

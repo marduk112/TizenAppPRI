@@ -9,14 +9,15 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <script src="js/main.js"></script>
+    <script src="js/lowBatteryCheck.js"></script>
 </head>
 
 <body>
   <div class="ui-title">SAP PULSEX</div>  
   <div>
-  	<input type="button" value="Connect" onclick="connect();" style="width: 32%; height: 60px; -webkit-tap-highlight-color: rgba(0,0,0,0);"/>
-  	<input type="button" value="fetch" onclick="fetch();" style="width: 32%; height: 60px; -webkit-tap-highlight-color: rgba(0,0,0,0);"/>
-  	<input type="button" value="Disconnect" onclick="disconnect();" style="width: 32%; height: 60px; -webkit-tap-highlight-color: rgba(0,0,0,0);"/>
+  	<input id="btn" type="button" value="CONNECT" onclick="connect();"/>
+  	<input id="btn" type="button" value="FETCH" onclick="fetch();"/>
+  	<input id="btn" type="button" value="DISCONNECT" onclick="disconnect();"/>
   </div>
   <div id="resultBoard">
   </div>
