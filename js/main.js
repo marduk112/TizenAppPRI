@@ -63,10 +63,11 @@ function connect() {
 		alert('Already connected!');
         return false;
     }
-	try {
+	try {		
 		webapis.sa.requestSAAgent(onsuccess, function (err) {
 			console.log("err [" + err.name + "] msg[" + err.message + "]");
 		});
+		webapis.motion.start("HRM", onchangedCB);
 	} catch(err) {
 		console.log("exception [" + err.name + "] msg[" + err.message + "]");
 	}
@@ -79,6 +80,7 @@ function disconnect() {
 			SASocket = null;
 			createHTML("closeConnection");
 		}
+		webapis.motion.stop("HRM");
 	} catch(err) {
 		console.log("exception [" + err.name + "] msg[" + err.message + "]");
 	}
@@ -91,9 +93,11 @@ function onreceive(channelId, data) {
 
 function onchangedCB(hrmInfo)
 {
-   console.log("Heart Rate: " + hrmInfo.heartRate);
-   console.log("Peak-to-peak interval: " + hrmInfo.rRInterval + " milliseconds");
-   alert("Heart Rate: " + hrmInfo.heartRate);
+   //console.log("Heart Rate: " + hrmInfo.heartRate);
+   //console.log("Peak-to-peak interval: " + hrmInfo.rRInterval + " milliseconds");
+	createHTML(hrmInfo.heartRate);
+	SASocket.sendData(CHANNELID, hrmInfo.heartRate);
+   //alert("Heart Rate: " + hrmInfo.heartRate);
 }
 
 function fetch() {
@@ -109,7 +113,9 @@ function fetch() {
 window.onload = function () {
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
-        if(e.keyName == "back")
+        if(e.keyName == "back") {
+        	webapis.motion.stop("HRM");
             tizen.application.getCurrentApplication().exit();
+        }
     });
 };
