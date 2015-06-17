@@ -3,6 +3,7 @@ var SAAgent = null;
 var SASocket = null;
 var CHANNELID = 123;
 var ProviderAppName = "PulsometerProvider";
+var time = 0;
 
 function createHTML(log_string)
 {
@@ -69,7 +70,7 @@ function connect() {
 		});
 		webapis.motion.start("HRM", onchangedCB);
 	} catch(err) {
-		console.log("exception [" + err.name + "] msg[" + err.message + "]");
+		console.log("exception [" + err.name + "] msg[" + err.message + "]");		
 	}
 }
 
@@ -95,8 +96,13 @@ function onchangedCB(hrmInfo)
 {
    //console.log("Heart Rate: " + hrmInfo.heartRate);
    //console.log("Peak-to-peak interval: " + hrmInfo.rRInterval + " milliseconds");
-	//createHTML(hrmInfo.heartRate);
-	SASocket.sendData(CHANNELID, hrmInfo.heartRate);
+	if(hrmInfo.heartRate > 0 && time > 500) {
+		SASocket.sendData(CHANNELID, hrmInfo.heartRate);
+		time = 0;
+	}
+	else if (time <= 500) {
+		time += hrmInfo.rRInterval;
+	}
    //alert("Heart Rate: " + hrmInfo.heartRate);
 }
 
@@ -104,7 +110,6 @@ function fetch() {
 	try {
 		SASocket.setDataReceiveListener(onreceive);
 		SASocket.sendData(CHANNELID, "Hello Accessory!");		
-	
 	} catch(err) {
 		console.log("exception [" + err.name + "] msg[" + err.message + "]");
 	}
@@ -113,7 +118,9 @@ function fetch() {
 window.onload = function () {
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
-        if(e.keyName == "back")
+        if(e.keyName == "back") {
+        	webapis.motion.stop("HRM");
             tizen.application.getCurrentApplication().exit();
+        }
     });
 };
