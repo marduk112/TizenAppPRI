@@ -13,7 +13,7 @@
                 id="123"
                 dataRate="low"
                 priority="low"
-                reliability="enable"/>
+                reliability="enable"/>          
         </serviceProfile>
     </application>
 </resources>
